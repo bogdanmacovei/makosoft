@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Adaugare</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+	<link rel="stylesheet" type="text/css" href="default.css">
+	<script src = "js/adaugare.js"></script>
+</head>
+<body>
+
+<!-- Bara fixata -->
+
+<ul>
+  <li><div class = "makosoft" style = "padding-left: 10px; 
+  padding-right: 10px;">Makosoft</div></li>
+
+  <li><a class="active" href="/adaugare.html"><b>Adauga curs</b></a></li>
+  <li><a href="/cursuri.html"><b>Cursuri</b></a></li>
+  <li><a href="/note.html"><b>Note</b></a></li>
+</ul>
+
+<div style="padding:20px;
+			margin-top:30px;">
+
+<div id = "main">
+
+	<div align = "center">
+		<h1> Introducere curs </h1>
+	</div>
+</div>
+
+<div id = "sidebar"></div>
+
+<div id = "main">
+
+<fieldset style = "font-size: 18px;">
+	<table style = "width: 100%; border: 0px solid black;">
+		<tr style = "border: 0px solid black;">
+			<td style = "border: 0px solid black;"> 
+				<div style = "font-size: 22px; 
+						    color: #292F33;
+							width: 90%;
+							font-weight: bold;
+							text-align: center;
+							border-radius: 10px;"> 
+					Detalii 
+				</div> 
+
+				<p><b>Nume curs</b></p>
+				<input type = "text" id = "nume" placeholder = "Nume...">
+
+				<p><b> Numar de credite </b></p>
+				<input type = "numer" id = "credite" placeholder = "Credite..."> 
+			</td>
+
+			<td style = "border: 0px solid black;"> 
+				<div style = "font-size: 22px; 
+						    color: #292F33;
+							width: 90%;
+							font-weight: bold;
+							text-align: center;
+							border-radius: 10px;"> 
+					Perioada
+				</div> 
+
+				<p><b>An</b></p>
+				<input type = "text" id = "an" placeholder = "An...">
+
+				<p><b>Semestru</b></p>
+				<input type = "text" id = "semestru" placeholder = "Semestru..."> 
+			</td>
+		</tr>
+
+		<tr style = "border: 0px solid black;">
+			<td style = "border: 0px solid black;">
+				<br>
+				<div style = "font-size: 22px; 
+						    color: #292F33;
+							width: 90%;
+							font-weight: bold;
+							text-align: center;
+							border-radius: 10px;"> 
+					Profesori 
+				</div> 
+
+				<p><b>Curs</b></p>
+				<input type = "text" id = "curs" placeholder = "Profesor curs...">
+
+				<p><b>Seminar</b></p>
+				<input type = "text" id = "seminar" placeholder = "Profesor seminar...">
+
+				<p><b>Laborator</b></p>
+				<input type = "text" id = "laborator" placeholder = "Profesor laborator..."> 
+			</td>
+
+			<td style = "border: 0px solid black;"> 
+				<br>
+				<div style = "font-size: 22px; 
+						    color: #292F33;
+							width: 90%;
+							font-weight: bold;
+							text-align: center;
+							border-radius: 10px;"> 
+					Pondere 
+				</div> 
+
+				<p><b>Pondere examen scris</b></p>
+				<input type = "number" id = "ponderecurs" placeholder = "Pondere scris...">
+
+				<p><b>Pondere seminar</b></p>
+				<input type = "number" id = "pondereseminar" placeholder = "Pondere seminar...">
+
+				<p><b>Pondere laborator</b></p>
+				<input type = "number" id = "ponderelaborator" placeholder = "Pondere laborator..."> 
+			</td>
+		</tr>
+
+	</table>
+
+	<br>
+
+	<div align = "right" style = "padding-right:47px;"><button id = "send" class = "pagination"> Introduce curs </button></div>
+</fieldset>
+
+<br><br>
+
+</div>
+
+<div id = "sidebar">
+<fieldset style = "border-left: 0px solid black; padding-right: 10px; 
+								 padding-left: 10px; font-size: 18px;">
+	<div align = "center"> 
+		<b> Ultimele cursuri </b>
+	</div>
+	<br>
+	<div class = "result"> </div>
+</fieldset>
+</div>
+
+</body>
+</html>

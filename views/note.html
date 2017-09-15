@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Note</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+	<link rel="stylesheet" type="text/css" href="default.css">
+	<script src = "js/note.js"> </script>
+</head>
+<body>
+
+<!-- Bara fixata -->
+
+<ul>
+  <li><div class = "makosoft" style = "padding-left: 10px; 
+  padding-right: 10px;">Makosoft</div></li>
+
+  <li><a href="/adaugare.html"><b>Adauga curs</b></a></li>
+  <li><a href="/cursuri.html"><b>Cursuri</b></a></li>
+  <li><a class = "active" href="/note.html"><b>Note</b></a></li>
+</ul>
+
+<div style="padding:20px;
+			margin-top:30px;">
+
+
+
+<div id = "main">
+	<div align = "center">
+			<h1> Note </h1>
+	</div>
+</div>
+
+<div id = "sidebar"></div>
+
+<div id = "main">
+
+	<table id = "rez" style = "background-color: #CCD6DD; border-radius: 4px; overflow-x:auto; width: 100%; font-size: 18px;">
+		<tr>
+			<th style = "padding-top: 10px; padding-bottom: 10px; background-color: #66757F;"> Data </th>
+			<th style = "padding-top: 10px; padding-bottom: 10px; background-color: #66757F;"> Materia </th>
+			<th style = "padding-top: 10px; padding-bottom: 10px; background-color: #66757F;"> Tip </th>
+			<th style = "padding-top: 10px; padding-bottom: 10px; background-color: #66757F;"> Nota </th>
+			<th style = "padding-top: 10px; padding-bottom: 10px; background-color: #66757F;"> Sterge </th>
+		</tr>
+
+	</table>
+
+<br><br>
+
+</div>
+
+<div id = "sidebar">
+<fieldset style = "border-left: 0px solid black; padding-right: 10px; 
+								 padding-left: 10px; font-size: 18px;">
+	<div align = "center"> 
+		<b style = "font-size: 18px;"> Introducere nota </b>
+	</div>
+	<br>
+
+		<select style = "width: 100%;" id = "curs"></select>
+		<br><br>
+		<select style = "width: 48%;" id = "tip">
+			<option> Curs </option>
+			<option> Seminar </option>
+			<option> Laborator </option>
+		</select>
+
+		<select style = "width: 48%; float: right;" id = "nota">
+			<option> 10 </option>
+			<option> 9 </option>
+			<option> 8 </option>
+			<option> 7 </option>
+			<option> 6 </option>
+			<option> 5 </option>
+			<option> 4 </option>
+			<option> 3 </option>
+			<option> 2 </option>
+			<option> 1 </option>
+		</select>
+		
+		<br><br>
+		<div align = "center"><button class = "pagination" style = "width: 62%;" id = "send"> Introduce nota </button></div>
+
+</fieldset>
+</div>
+
+</body>
+</html>

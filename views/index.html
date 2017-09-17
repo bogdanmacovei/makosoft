@@ -2,7 +2,10 @@
 <html>
 <head>
 	<title>Pagina principala</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 	<link rel="stylesheet" type="text/css" href="default.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -10,7 +13,7 @@
 	  <li><div class = "makosoft" style = "padding-left: 10px; 
 	  padding-right: 10px;">Makosoft</div></li>
 
-	  <li><a href="/adaugare.html"><b>Adauga curs</b></a></li>
+	  <li><a href="/adaugare.html"><b>Adaugare curs</b></a></li>
 	  <li><a href="/cursuri.html"><b>Cursuri</b></a></li>
 	  <li><a href="/note.html"><b>Note</b></a></li>
 	</ul>
@@ -18,8 +21,92 @@
 	<div style="padding:20px;
 				margin-top:30px;">
 
-	<h1> Bine ai venit! </h1>
-	<fieldset style = "font-size: 18px; text-align: justify;"> Platforma este dedicata inregistrarii informatiilor despre notele obtinute pe o perioada de 3 ani. Folositi bara de navigare pentru a avea acces la functiile site-ului. </fieldset>
+	<h1> Bine ati venit! </h1>
+	<fieldset style = "border-left: 0px solid black; font-size: 18px;padding-right: 30px">Platforma este dedicata inregistrarii informatiilor despre notele obtinute pe o perioada de 3 ani. Folositi bara de navigare pentru a avea acces la functiile site-ului. 
 
+		<br><br>
+		<b>Planificator de evenimente</b> <br>
+
+		<div align = "center">
+			<textarea placeholder = "Descrierea evenimentului" id = "text" style = "width: 100%; height: 50px;"></textarea>
+		</div>
+
+		<button class = "pagination">Salvati evenimentul</button>
+
+	</fieldset>
+
+<h2> Evenimente </h2>
+
+<div class = "result"> </div>
+
+<script>
+function createID() {
+	var d = new Date();
+
+	var year = d.getFullYear() % 100;
+
+	var mon = d.getMonth() + 1;
+	if(mon < 10)
+		mon = '0' + mon;
+
+	var day = d.getDate();
+	if(day < 10)
+		day = '0' + day;
+
+	var hr = d.getHours();
+	if(hr < 10)
+		hr = '0' + hr;
+
+	var min = d.getMinutes();
+	if(min < 10)
+		min = '0' + min;
+
+	var sec = d.getSeconds();
+	if(sec < 10)
+		sec = '0' + sec;
+
+	var id = year + mon + day + hr + min + sec;
+
+	return id;
+}
+
+$.get ('/selectSugestii')
+	.then (data => {
+		for (var i = 0; i < data.length; ++i) {
+			$('.result').append (
+				'<fieldset>'
+			  + '<div class = "column1">'
+			  + '<b>#' + data[i]._id
+			  + '</b>: ' + data[i].comentariu 
+			  + '</div> <div class = "column2">'
+			  + '<blank class = "delete" style = "font-size: 20px; color:black;cursor:pointer;" id = "' + data[i]._id + '"><i class="fa fa-remove"></i></blank>'
+			  + '</div>'
+			  + '</fieldset><br>'
+			);
+		}
+
+		$('.delete').click (function () {
+			var id = $(this).attr('id');
+
+			$.get ('/stergeSugestie/' + id)
+				.then (data => {});
+
+			alert ('Sugestia a fost stearsa!');
+			window.location = '/';
+		});
+	});
+
+$('.pagination').click (function () {
+	var objToMongo = {
+		_id: createID(),
+		comentariu: $('#text').val(),
+		voturi: 0
+	};
+	$.post ('/insertSugestie', objToMongo, function (data) {}, 'json');
+
+	alert ('Sugestia a fost inregistrata cu succes!');
+	window.location = '/';
+});
+</script>
 </body>
 </html>

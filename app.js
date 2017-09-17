@@ -67,6 +67,16 @@ mongoose.model ('Nota', notaSchema);
 
 var Nota = mongoose.model ('Nota');
 
+var sugestieSchema = new mongoose.Schema({
+	_id: Number,
+	comentariu: String,
+	voturi: Number
+}, {collection: 'sugestie'});
+
+mongoose.model ('Sugestie', sugestieSchema);
+
+var Sugestie = mongoose.model ('Sugestie');
+
 // get pages
 
 app.get ('/', function (req, res) {
@@ -93,18 +103,23 @@ app.get ('/cursuri.html', function (req, res) {
 
 app.post ('/insertCurs', function (req, res) {
 	var curs = new Curs (req.body);
-	curs.save();
+	curs.save ();
 });
 
 app.post ('/insertNota', function (req, res) {
 	var nota = new Nota (req.body);
-	nota.save();
+	nota.save ();
 });
 
 app.post ('/updateMedia', function (req, res) {
 	Curs.updateOne (req.body.find, req.body.replace)
 		.catch (err => console.log (err))
 		.then (() => console.log ('succes'));
+});
+
+app.post ('/insertSugestie', function (req, res) {
+	var sugestie = new Sugestie (req.body);
+	sugestie.save ();
 });
 // Curs.find({})
 // 	.catch (err => console.log (err))
@@ -165,4 +180,20 @@ app.get ('/ultimeleCursuri', function (req, res) {
 	Curs.find({}).sort({_id: -1}).limit(5)
 		.catch (err => console.log (err))
 		.then (result => res.send (result));
+});
+
+app.get ('/selectSugestii', function (req, res) {
+	Sugestie.find({})
+		.catch (err => console.log (err))
+		.then (result => {
+			res.send (result);
+		});
+});
+
+app.get ('/stergeSugestie/:id', function (req, res) {
+	Sugestie.deleteOne({_id: req.params.id})
+		.catch (err => console.log (err))
+		.then (() => {
+			console.log ('succes');
+		});
 });

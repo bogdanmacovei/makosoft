@@ -267,4 +267,19 @@ table, th, td {
     border: 0px solid black;
     padding-left: 10px;
     padding-right: 10px;
+    cursor: pointer;
+}
+
+.specialtable {
+    border: 0px solid black;
+}
+
+.column1 {
+    float: left;
+    width: 97%;
+}
+
+.column2 {
+    float: right;
+    width: 2%;
 }

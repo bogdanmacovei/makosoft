@@ -1,32 +1,32 @@
 function createID() {
-		var d = new Date();
+	var d = new Date();
 
-		var year = d.getFullYear() % 100;
+	var year = d.getFullYear() % 100;
 
-		var mon = d.getMonth() + 1;
-		if(mon < 10)
-			mon = '0' + mon;
+	var mon = d.getMonth() + 1;
+	if(mon < 10)
+		mon = '0' + mon;
 
-		var day = d.getDate();
-		if(day < 10)
-			day = '0' + day;
+	var day = d.getDate();
+	if(day < 10)
+		day = '0' + day;
 
-		var hr = d.getHours();
-		if(hr < 10)
-			hr = '0' + hr;
+	var hr = d.getHours();
+	if(hr < 10)
+		hr = '0' + hr;
 
-		var min = d.getMinutes();
-		if(min < 10)
-			min = '0' + min;
+	var min = d.getMinutes();
+	if(min < 10)
+		min = '0' + min;
 
-		var sec = d.getSeconds();
-		if(sec < 10)
-			sec = '0' + sec;
+	var sec = d.getSeconds();
+	if(sec < 10)
+		sec = '0' + sec;
 
-		var id = year + mon + day + hr + min + sec;
+	var id = year + mon + day + hr + min + sec;
 
-		return id;
-	}
+	return id;
+}
 
 $('#send').click (function () {
 	var objToMongo = {

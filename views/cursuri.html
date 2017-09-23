@@ -63,52 +63,61 @@ $.get ('/selectCursuri')
 		for (var i = 0; i < data.length; ++i) {
 			if (data[i].perioada.an === 1) {
 				$('#firstcol1')
-					.append ('<fieldset>\
-							 	<a href = "curs.html?id=' 
+					.append ('<fieldset>'
+								+ '<div class = "column1">'
+							 	+ '<a href = "curs.html?id=' 
 								+ data[i]._id + '"><b style = "font-size: 18px;">' 
 								+ data[i].nume + '</b></a>'
 								+ ' <br>Semestrul: <b>' 
 								+ data[i].perioada.semestru
-								+ '</b>, nota finala: <b>'
+								+ '</b>, nota finala: <b style = "color: #292F33;">'
 								+ information(data[i].rezultat.media) 
 								+ '</b><br>Profesor curs: <b>' 
 								+ data[i].profesor.curs + '</b>'
-								+ '<br><button class = "del" id = "' + data[i]._id +'">Sterge</button>'
-							    + '</fieldset><br>');
+								+ '</div>'
+								+ '<div class = "column2">'
+								+ '<b style = "cursor: pointer; font-size: 20px; font-weight: bold;" class = "del1" id = "' + data[i]._id +'">&times;</b>'
+							    + '</div></fieldset><br>');
 			}
 			else if (data[i].perioada.an === 2) {
 				$('#firstcol2')
-					.append ('<fieldset>\
-							 	<a href = "curs.html?id=' 
+					.append ('<fieldset>'
+								+ '<div class = "column1">'
+							 	+ '<a href = "curs.html?id=' 
 								+ data[i]._id + '"><b style = "font-size: 18px;">' 
 								+ data[i].nume + '</b></a>'
 								+ ' <br>Semestrul: <b>' 
 								+ data[i].perioada.semestru
-								+ '</b>, nota finala: <b>'
+								+ '</b>, nota finala: <b style = "color: #292F33;">'
 								+ information(data[i].rezultat.media) 
 								+ '</b><br>Profesor curs: <b>' 
 								+ data[i].profesor.curs + '</b>'
-								+ '<br><button class = "del" id = "' + data[i]._id +'">Sterge</button>'
-							    + '</fieldset><br>');
+								+ '</div>'
+								+ '<div class = "column2">'
+								+ '<b style = "cursor: pointer; font-size: 20px; font-weight: bold;" class = "del1" id = "' + data[i]._id +'">&times;</b>'
+							    + '</div></fieldset><br>');
 			}
 
 			else if (data[i].perioada.an === 3) {
 				$('#second')
-					.append ('<fieldset>\
-							 	<a href = "curs.html?id=' 
+					.append ('<fieldset>'
+								+ '<div class = "column1">'
+							 	+ '<a href = "curs.html?id=' 
 								+ data[i]._id + '"><b style = "font-size: 18px;">' 
 								+ data[i].nume + '</b></a>'
 								+ ' <br>Semestrul: <b>' 
 								+ data[i].perioada.semestru
-								+ '</b>, nota finala: <b>'
+								+ '</b>, nota finala: <b style = "color: #292F33;">'
 								+ information(data[i].rezultat.media) 
 								+ '</b><br>Profesor curs: <b>' 
 								+ data[i].profesor.curs + '</b>'
-								+ '<br><button class = "del" id = "' + data[i]._id +'">Sterge</button>'
-							    + '</fieldset><br>');
+								+ '</div>'
+								+ '<div class = "column2">'
+								+ '<b style = "cursor: pointer; font-size: 20px; font-weight: bold;" class = "del1" id = "' + data[i]._id +'">&times;</b>'
+							    + '</div></fieldset><br>');
 			}
 
-			$('.del').click (function () {
+			$('.del1').click (function () {
 				$.get ('/stergeCurs/' + $(this).attr('id'))
 					.then (data1 => {});
 				

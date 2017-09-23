@@ -25,13 +25,58 @@
 	<fieldset style = "border-left: 0px solid black; font-size: 18px;padding-right: 30px">Platforma este dedicata inregistrarii informatiilor despre notele obtinute pe o perioada de 3 ani. Folositi bara de navigare pentru a avea acces la functiile site-ului. 
 
 		<br><br>
-		<b>Planificator de evenimente</b> <br>
+		<b>Planificator de evenimente</b> <br><br>
 
-		<div align = "center">
-			<textarea placeholder = "Descrierea evenimentului" id = "text" style = "width: 100%; height: 50px;"></textarea>
+	<div class = "column1ev">
+		<table style = "border: 0px solid black; width: 100%;">
+			<tr style = "border: 0px solid black;">
+				<td style = "border: 0px solid black;">
+					<b>Zi inceput</b>
+				</td>
+				<td style = "border: 0px solid black;"> 
+					<input style = "width:100%;" id = "zi_inceput" type = "date">
+				</td>
+			</tr>
+
+			<tr style = "border: 0px solid black;">
+				<td style = "border: 0px solid black;">
+					<b>Zi finalizare</b>
+				</td>
+				<td style = "border: 0px solid black;"> 
+					<input style = "width:100%;" id = "zi_finalizare" type = "date">
+				</td>
+			</tr>
+
+			<tr style = "border: 0px solid black;">
+				<td style = "border: 0px solid black;">
+					<b>Subiect</b>
+				</td>
+				<td style = "border: 0px solid black;"> 
+					<input style = "width:100%;" id = "subiect" type = "text" placeholder = "Subiectul evenimentului...">
+				</td>
+			</tr>
+
+			<tr style = "border: 0px solid black;">
+				<td style = "border: 0px solid black;">
+					<b>Categorie</b>
+				</td>
+				<td style = "border: 0px solid black;"> 
+					<select id = "categorie" style = "width: 102%;">
+						<option> Urgent/important </option>
+						<option> Obisnuit </option>
+					</select>
+				</td>
+			</tr>
+		</table> 
+	</div>
+	
+	<div class = "column2ev">
+		<textarea placeholder = "Descrierea evenimentului" id = "descriere" style = "width: 100%; height: 50px;"></textarea>
+
+		<div align = "right">
+			<button style = "font-size: 12px;" class = "pagination">Salvati evenimentul</button>
 		</div>
-
-		<button class = "pagination">Salvati evenimentul</button>
+	</div>
 
 	</fieldset>
 
@@ -40,6 +85,7 @@
 <div class = "result"> </div>
 
 <script>
+
 function createID() {
 	var d = new Date();
 
@@ -72,20 +118,49 @@ function createID() {
 
 $.get ('/selectSugestii')
 	.then (data => {
+		// alert (JSON.stringify (data));
 		for (var i = 0; i < data.length; ++i) {
-			$('.result').append (
-				'<fieldset>'
-			  + '<div class = "column1">'
-			  + '<b>#' + data[i]._id
-			  + '</b>: ' + data[i].comentariu 
-			  + '</div> <div class = "column2">'
-			  + '<blank class = "delete" style = "font-size: 20px; color:black;cursor:pointer;" id = "' + data[i]._id + '"><i class="fa fa-remove"></i></blank>'
-			  + '</div>'
-			  + '</fieldset><br>'
-			);
+			if (data[i].categorie == 'Urgent/important')
+				$('.result').append(
+					'<fieldset style = "border-left: 8px solid red">'
+					+ '<div class = "column1">'
+					+	'<b style = "font-size: 18px;">' + data[i].subiect + '</b>'
+					+	'<br><i>(' + data[i].data.zi_inceput + ' - ' + data[i].data.zi_finalizare + ')</i>'
+					+	'<br><br>' + data[i].descriere 
+					+ '</div>'
+					+ '<div class = "column2" style = "font-size: 24px; font-weight: bold; cursor: pointer;" id = "' + data[i]._id + '">'
+					+ 	'&times;'
+					+ '</div>'
+					+ '</fieldset> <br>'
+				);
+			else 
+				$('.result').append(
+					'<fieldset>'
+					+ '<div class = "column1">'
+					+	'<b style = "font-size: 18px;">' + data[i].subiect + '</b>'
+					+	'<br><i>(' + data[i].data.zi_inceput + ' - ' + data[i].data.zi_finalizare + ')</i>'
+					+	'<br><br>' + data[i].descriere 
+					+ '</div>'
+					+ '<div class = "column2" style = "font-size: 24px; font-weight: bold; cursor: pointer;" id = "' + data[i]._id + '">'
+					+ 	'&times;'
+					+ '</div>'
+					+ '</fieldset> <br>'
+				);
 		}
+		// for (var i = 0; i < data.length; ++i) {
+		// 	$('.result').append (
+		// 		'<fieldset>'
+		// 	  + '<div class = "column1">'
+		// 	  + '<b>#' + data[i]._id
+		// 	  + '</b>: ' + data[i].comentariu 
+		// 	  + '</div> <div class = "column2">'
+		// 	  + '<blank class = "delete" style = "font-size: 20px; color:black;cursor:pointer;" id = "' + data[i]._id + '"><i class="fa fa-remove"></i></blank>'
+		// 	  + '</div>'
+		// 	  + '</fieldset><br>'
+		// 	);
+		// }
 
-		$('.delete').click (function () {
+		$('.column2').click (function () {
 			var id = $(this).attr('id');
 
 			$.get ('/stergeSugestie/' + id)
@@ -99,14 +174,21 @@ $.get ('/selectSugestii')
 $('.pagination').click (function () {
 	var objToMongo = {
 		_id: createID(),
-		comentariu: $('#text').val(),
-		voturi: 0
+		data: {
+			zi_inceput: $('#zi_inceput').val(),
+			zi_finalizare: $('#zi_finalizare').val()
+		},
+		subiect: $('#subiect').val(),
+		categorie: document.getElementById('categorie').options[document.getElementById('categorie').selectedIndex].text,
+		descriere: $('#descriere').val()
 	};
+
 	$.post ('/insertSugestie', objToMongo, function (data) {}, 'json');
 
 	alert ('Sugestia a fost inregistrata cu succes!');
 	window.location = '/';
 });
+
 </script>
 </body>
 </html>

@@ -69,8 +69,13 @@ var Nota = mongoose.model ('Nota');
 
 var sugestieSchema = new mongoose.Schema({
 	_id: Number,
-	comentariu: String,
-	voturi: Number
+	data: {
+		zi_inceput: String,
+		zi_finalizare: String
+	},
+	subiect: String,
+	categorie: String,
+	descriere: String
 }, {collection: 'sugestie'});
 
 mongoose.model ('Sugestie', sugestieSchema);

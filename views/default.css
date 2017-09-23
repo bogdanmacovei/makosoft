@@ -283,3 +283,13 @@ table, th, td {
     float: right;
     width: 2%;
 }
+
+.column1ev {
+    float: left;
+    width: 25%;
+}
+
+.column2ev {
+    float: right;
+    width: 73%;
+}
